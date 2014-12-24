@@ -1,0 +1,27 @@
+#sdk: "C:/MotorolaRhoMobileSuite5.0.2/ruby/lib/ruby/gems/1.9.1/gems/rhodes-5.0.2"
+sdkversion: "5.0.0"
+name: "Langues"
+version: 1.0
+vendor: "rhomobile"
+#build: "debug"
+build: "release"
+applog: "rholog.txt"
+iphone:
+  configuration: "Release"
+  sdk: "iphonesimulator7.0"
+  provisionprofile: 
+  codesignidentity: "iPhone Developer"
+  entitlements: 
+  BundleIdentifier: "com.rhomobile.italien"
+  BundleURLScheme: "italien"
+wp8:
+  productid: "b50f5ad0-4fa5-0132-50bb-08002700f86f"
+android:
+  manifest_template: "AndroidManifest.erb"
+  version: "4.0.3"
+  emulator: "android_422"
+  production:
+    certificate: "./certificate"
+    password: "51julie2"
+    alias: "julie"
+wm: 

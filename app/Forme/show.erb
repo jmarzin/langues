@@ -1,0 +1,46 @@
+<div data-role="page" data-add-back-btn="false">
+
+  <div data-role="header" data-position="inline">
+    <h1><%= Forme::CODES[@forme.code_forme.to_i][1] %> <%= @forme.langue %></h1>
+    <a href="<%= $session[:origine] %>" class="ui-btn-left" data-icon="arrow-l" data-direction="reverse">
+      Back
+    </a>
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      
+          <li>
+            <div class="itemLabel">Personne/temps/verbe</div>
+            <p class="taillepers"><%= Forme::CODES[@forme.code_forme.to_i][0] %> de <%= Verbe.find(@forme.verbe_id).infinitif %></p>
+          </li>
+      
+          <li>
+            <div class="itemLabel"><%= $session[:langue] %></div>
+            <div class="itemValue"><%= Forme::CODES[@forme.code_forme.to_i][1] %> <%= @forme.langue %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Poids</div>
+            <div class="itemValue"><%= @forme.poids %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">DerniereRevision</div>
+            <div class="itemValue"><%= @forme.derniere_revision %></div>
+          </li>
+
+          <li>
+            <div class="itemLabel">Nombre d'erreurs</div>
+            <div class="itemValue"><%= @forme.nb_err %></div>
+          </li>
+          
+          <li>
+            <div class="itemLabel">Date de mise-à-jour</div>
+            <div class="itemValue"><%= @forme.date_maj %></div>
+          </li>
+          
+    </ul>
+  </div>
+
+</div>

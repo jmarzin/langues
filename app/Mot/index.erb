@@ -1,0 +1,28 @@
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>Mots</h1>
+    <a href="<%= Rho::Application.startURI %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      <% @mots.each do |mot| %>
+      
+          <li>
+            <a href="<%= url_for :action => :show, :id => mot.object %>">
+              <%= mot.francais %>
+            </a>
+          </li>
+      
+      <% end %>
+    </ul>
+  </div>
+  
+  <div data-role="footer" data-position="inline">
+    <%= pagination %>
+  </div>
+
+</div>

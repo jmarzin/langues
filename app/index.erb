@@ -1,0 +1,31 @@
+<div data-role="page" data-url="<%= Rho::Application.startURI %>/">
+
+  <div data-role="header" data-position="inline">
+    <h1 id='langue'><%= $session[:langue] %></h1>
+  </div>
+  
+  <div class = 'choix_langue'>
+    <img id='italien' src='/public/images/italien.png' alt="italien" height='42' width='42' class='ui-btn ui-btn-inline'/>
+    <img id='anglais' src='/public/images/anglais.png' alt="anglais" height='42' width='42' class='ui-btn ui-btn-inline'/>
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      <li><a class='controle' href="<%= url_for :controller => :Theme, :action => :index %>" data-transition="slide">Themes</a></li>
+      <li><a class='controle' href="<%= url_for :controller => :Mot, :action => :index %>" data-transition="slideup">Mots</a></li>
+      <li><a class='controle' href="<%= url_for :controller => :Verbe, :action => :index %>" data-transition="slideup">Verbes</a></li>
+      <li><a class='controle' href="<%= url_for :controller => :Forme, :action => :index %>" data-transition="slideup">Formes verbales</a></li>
+      <% if $session[:param] and ($session[:param][:objet] == "Forme") then %>
+        <li><a class='controle' href="<%= url_for :controller => :Revision, :action => :question_f %>" data-transition="slidedown">Reviser</a></li>
+      <% else %>
+        <li><a class='controle' href="<%= url_for :controller => :Revision, :action => :question %>" data-transition="slidedown">Reviser</a></li>
+      <% end %>
+      <li><a class='controle' href="<%= url_for :controller => :Parametre, :action => :saisie %>" data-transition="fade">Parametrer</a></li>
+      <li><a href="<%= url_for :controller => :Application, :action => :quit_app %>">Quitter</a></li>
+
+    </ul>
+
+  </div> 
+  <p class="chargement" hidden>Mise-a-jour en cours...</div>
+</div>
+     

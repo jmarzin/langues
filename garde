@@ -1,0 +1,13 @@
+
+
+
+            <input type="checkbox" id="themes[i]" name="themes[i]" checked = "checked" value="<%= theme.nom" />
+          <% else %>
+
+
+          <input type="checkbox" id= name="themes[#{i}]" value="<%= theme.nom %>" /><%= theme.nom %>
+          <br>
+
+
+          <% end %>
+

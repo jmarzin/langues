@@ -1,0 +1,56 @@
+<div data-role="page" data-add-back-btn="false">
+
+  <div data-role="header" data-position="inline">
+    <h1><%= @mot.francais %></h1>
+    <a href="<%= $session[:origine] %>" class="ui-btn-left" data-icon="arrow-l" data-direction="reverse">
+      Back
+    </a>
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+    
+          <li>
+            <div class="itemLabel">Theme</div>
+            <div class="itemValue"><%= Theme.find(@mot.theme_id).nom %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Francais</div>
+            <div class="itemValue"><%= @mot.francais %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Directeur</div>
+            <div class="itemValue"><%= @mot.directeur %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel"><%= $session[:langue] %></div>
+            <div class="itemValue"><%= @mot.langue %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Poids</div>
+            <div class="itemValue"><%= @mot.poids %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">DerniereRevision</div>
+            <div class="itemValue"><%= @mot.derniere_revision %></div>
+          </li>
+      
+          <li>
+            <div class="itemLabel">Nombre d'erreurs</div>
+            <div class="itemValue"><%= @mot.nb_err %></div>
+          </li>
+          
+          <li>
+            <div class="itemLabel">Date de mise-à-jour</div>
+            <div class="itemValue"><%= @mot.date_maj %></div>
+          </li>
+
+    </ul>
+  </div>
+
+</div>

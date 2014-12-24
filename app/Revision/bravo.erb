@@ -1,0 +1,35 @@
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1 class="vert">Bravo !</h1>
+    <a href="<%= Rho::Application.startURI %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+	</div>
+
+  <div data-role="content">
+    <div> 
+      <%= $session[:nb_ko]+$session[:nb_ok] %> questions :
+      <%= $session[:pour_cent] %> % (poids restants = 
+      <%= $session[:liste].count%>)
+    </div>
+
+    <form method="POST" action="<%= url_for :action => :question %>" data-transition="slidedown">
+           
+          <h1> <%= Theme.find($session[:question].theme_id).nom %> </h1>
+          <h1> <%= $session[:question].francais %> </h1>
+          
+          <div data-role="fieldcontain">
+            <label for="reponse" class="fieldLabel">Votre reponse</label>
+            <input type="text" id="reponse" name="reponse" value="<%= @params["reponse"] %>" readonly/>
+          </div>
+  
+          <div>
+            <%= $session[:question].langue %> (poids <%= $session[:question].poids %>)
+          </div>
+         
+      <input type="submit" value="Autre question" autofocus/>
+    </form>
+  </div>
+
+</div>

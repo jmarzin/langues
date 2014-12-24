@@ -1,0 +1,27 @@
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>Formes</h1>
+    <a href="<%= Rho::Application.startURI %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+	</div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      <% @formes.each do |forme| %>
+          <li>
+            <a href="<%= url_for :action => :show, :id => forme.object %>">
+              <%= Forme::CODES[forme.code_forme.to_i][1] %> <%= forme.langue %>
+            </a>
+          </li>
+      
+      <% end %>
+    </ul>
+  </div>
+  
+  <div data-role="footer" data-position="inline">
+    <%= pagination %>
+  </div>
+  
+</div>

@@ -1,0 +1,52 @@
+<div data-role="page" data-add-back-btn="false">
+
+  <div data-role="header" data-position="inline">
+    <h1><%= @verbe.infinitif %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="arrow-l" data-direction="reverse">
+      Back
+    </a>
+  </div>
+
+  <div data-role="content">
+    <ul data-role="listview">
+      
+      <li>
+        <div class="itemLabel">Infinitif</div>
+        <div class="itemValue"><%= @verbe.infinitif %></div>
+      </li>
+       
+      <% i = 0 %>   
+      <% Forme.find(:all,:conditions => {:verbe_id => @verbe.object},:order => 'code_forme').each do |forme| %>
+        <% if i == 0 then %>
+          <h1>Gerondif</h1>
+        <% elsif i == 1 then %>
+          <h1>Participe passe</h1>
+        <% elsif i == 2 then %>
+          <h1>Present de l'indicatif</h1>
+        <% elsif i == 8 then %>
+          <h1>Imparfait de l'indicatif</h1>
+        <% elsif i == 14 then %>
+          <h1>Passe simple de l'indicatif</h1>
+        <% elsif i == 20 then %>
+          <h1>Futur de l'indicatif</h1>
+        <% elsif i == 26 then %>
+          <h1>Present du conditionnel</h1>
+        <% elsif i == 32 then %>
+          <h1>Present du subjonctif</h1>
+        <% elsif i == 38 then %>
+          <h1>Imparfait du subjonctif</h1>
+        <% elsif i == 44 %>
+          <h1>Imperatif</h1>
+          <p>-</>
+        <% end %>
+        <a href="<%= url_for :controller => Forme, :action => :show, :id => forme.object %>">
+          <%= Forme::CODES[forme.code_forme.to_i][1] %> <%= forme.langue %>
+        </a>
+        <br>
+        <% i += 1 %>
+      <% end %>
+      
+    </ul>
+  </div>
+
+</div>

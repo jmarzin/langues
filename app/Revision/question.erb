@@ -1,0 +1,33 @@
+<div data-role="page">
+
+	<div data-role="header" data-position="inline">
+    <h1>Question</h1>
+    <a href="<%= Rho::Application.startURI %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+      Home
+    </a>
+	</div>
+
+  <div data-role="content">
+    <div> 
+      <%= $session[:nb_ko]+$session[:nb_ok] %> questions :
+      <%= $session[:pour_cent] %> % (poids restants = 
+      <%= $session[:liste].count%>)
+    </div>
+
+    <form method="POST" action="<%= url_for :action => :reponse %>" data-transition="fade">
+           
+          <h1> <%= Theme.find($session[:question].theme_id).nom %> </h1>
+          <h1> <%= $session[:question].francais %> </h1>
+          
+          <div data-role="fieldcontain">
+                <label for="reponse" class="fieldLabel">Votre reponse</label>
+                <input type="text" id="reponse" name="reponse" <%= placeholder( "Reponse" ) %> autofocus />
+          </div>
+          
+          <br>
+                   
+      <input type="submit" value="Verifier"/>
+    </form>
+  </div>
+
+  </div>
