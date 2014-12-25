@@ -9,6 +9,11 @@ class ParametreController < Rho::RhoController
   # GET /Mot
   def saisie
     $session[:param] ||= {}
+    $session[:param][:themes] ||= []
+    $session[:param][:verbes] ||= []
+    $session[:liste] ||= []
+    @nb = $session[:liste].uniq.size
+    @message = "#{@nb} #{'élément'.pluralize(@nb)} dans la liste"
     render :back => '/app'
   end
   

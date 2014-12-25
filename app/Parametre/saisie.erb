@@ -2,7 +2,7 @@
 
   <div data-role="header" data-position="inline">
     <h1>Parametrage</h1>
-    <a href="<%= Rho::Application.startURI %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+    <a href="<%= Rho::Application.startURI %>" class="ui-btn-left" data-icon="home" data-direction="reverse" rel="external">
       Home
     </a>
   </div>
@@ -10,33 +10,26 @@
   <div data-role="content">
     <form method="POST" action="<%= url_for :action => :stockage %>">
 
-    <% if @message then %>
-      <h1> <%=@message %></h1>
-    <% else %>
-      <br>
-    <% end %>
+      <% if @message then %>
+        <h1> <%=@message %></h1>
+      <% else %>
+        <br>
+      <% end %>
+   
+      <input type="submit" value="Reconstruire la liste"/>
 
-      <div data-role="fieldcontain">       
+      <div data-role="fieldcontain" id="option">       
         <label for="objet" class="fieldLabel">Revision des</label>
         <select name="objet" id="objet">
-          <% if $session[:param][:objet]=="Mot" then %>
-            <option value="Mot" selected>Mots</option>
-            <option value="Forme">Conjugaisons</option>
-          <% elsif $session[:param][:objet]=="Forme" then %>
-            <option value="Mot">Mots</option>
-            <option value="Forme" selected>Conjugaisons</option>
-          <% else %>
-            <option value="Mot">Mots</option>
-            <option value="Forme">Conjugaisons</option> 
-          <% end %>
+          <option value="Mot" <%= 'selected' if $session[:param][:objet]=="Mot" %>>Mots</option>
+          <option value="Forme" <%= 'selected' if $session[:param][:objet]=="Forme" %>>Conjugaisons</option>
         </select>
       </div>
-        
+      
       <div data-role="fieldcontain">
         <label for="poids_min" class="fieldLabel">Poids minimum</label>
         <input type="text" id="poids_min" name="poids_min" value="<%= $session[:param][:poids_min]%>" />
       </div>
-
       <div data-role="fieldcontain">
         <label for="age_rev_min" class="fieldLabel">Non revise depuis</label>
         <input type="number" id="age_rev_min" name="age_rev_min" value="<%= $session[:param][:age_rev_min]%>" /> jour(s)
@@ -46,36 +39,30 @@
         <label for="err_min" class="fieldLabel">Nombre minimum d'erreurs</label>
         <input type="text" id="err_min" name="err_min" value="<%= $session[:param][:err_min]%>" />
       </div>
-
-      <div data-role="fieldcontain">
-        <h1>Restreindre aux themes suivants</h1>
-        <% i = 0 %>
-        <% Theme.liste.each do |theme| %>
-          <% if $session[:param][:themes] and $session[:param][:themes].include?(theme.object) then %>
-            <label for="themes[<%=i%>]"><input type="checkbox" checked id="themes[<%=i%>]" name="themes[<%=i%>]" value="<%= theme.object %>" /><%= theme.nom %></label>  
-          <% else %>
-            <label for="themes[<%=i%>]"><input type="checkbox" id="themes[<%=i%>]" name="themes[<%=i%>]" value="<%= theme.object %>" /><%= theme.nom %></label>  
+      
+      <div id=liste_mots <%= 'hidden' if $session[:param][:objet]=="Forme" %>>
+        <div data-role="fieldcontain">
+          <h1>Restreindre aux themes suivants</h1>
+          <% i = 0 %>
+          <% Theme.liste.each do |theme| %>
+            <label for="themes[<%=i%>]"><input type="checkbox" <%= 'checked' if $session[:param][:themes].include?(theme.object) %> id="themes[<%=i%>]" name="themes[<%=i%>]" value="<%= theme.object %>" /><%= theme.nom %></label>  
+            <% i += 1 %>
           <% end %>
-          <% i += 1 %>
-        <% end %>
+        </div>
       </div>
         
-      <div data-role="fieldcontain">       
-        <label for="verbe_id" class="fieldLabel">Verbe</label>
-        <select name="verbe_id" id="verbe_id">
-          <option value="">Tous les verbes</option>
-          <% Verbe.liste.each do |verbe| %>
-            <% if $session[:param][:verbes] and $session[:param][:verbes].include?(verbe.object) then %>
-              <option value="<%= verbe.object %>" selected><%= verbe.infinitif %></option>
-            <% else %>
-              <option value="<%= verbe.object %>"><%= verbe.infinitif %></option>
+      <div id=liste_verbes <%= 'hidden' if $session[:param][:objet]=="Mot" %>>
+        <div data-role="fieldcontain">       
+          <label for="verbe_id" class="fieldLabel">Verbe</label>
+          <select name="verbe_id" id="verbe_id">
+            <option value="">Tous les verbes</option>
+            <% Verbe.liste.each do |verbe| %>
+              <option value="<%= verbe.object %>" <%= 'selected' if $session[:param][:verbes].include?(verbe.object) %> ><%= verbe.infinitif %></option>
             <% end %>
-          <% end %>
-        </select>
+          </select>
+        </div>
       </div>
       
-      <input type="submit" value="Valider"/>
     </form>
   </div>
-
 </div>

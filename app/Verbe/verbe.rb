@@ -27,7 +27,7 @@ class Verbe
                              :date_maj => @date)
       else  
         @v = Verbe.create(:langue_id => $session[:langue][0..1],
-                          :dist_id => v[0]
+                          :dist_id => v[0],
                           :infinitif => v[1],
                           :date_maj => @date)
       end

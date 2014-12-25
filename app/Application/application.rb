@@ -1,3 +1,13 @@
+class String
+  def pluralize(nb)
+    if nb < 2 then
+      self
+    else
+      self+'s'
+    end
+  end
+end
+
 # The model has already been created by the framework, and extends Rhom::RhomObject
 # You can add more methods here
 
@@ -12,6 +22,8 @@ class Application
   
   def self.sauve_session
     $session[:nb_ok],$session[:nb_ko],$session[:pour_cent],$session[:deja_maj] = nil, nil, nil,'false'
+    $session[:MotController_page],$session[:ThemeController_page] = nil,nil
+    $session[:FormeController_page],$session[:VerbeController_page] = nil,nil
     @appli = Application.find(:first,:conditions=>{:langue=>$session[:langue]})
     if @appli then
       @appli.update_attributes(:session => Marshal.dump($session,limit=-1))
@@ -61,6 +73,7 @@ class Application
       return "erreur reseau" if response["status"] != "ok"
       liste = Rho::JSON.parse(response["body"])
       @themes = Theme.init(liste)
+      nb_objets += @themes.size
       response = Rho::Network.get({:url => site + "mots.json"})
       liste = Rho::JSON.parse(response["body"])
       nb_mots = Mot.init(@themes,liste)
@@ -82,13 +95,17 @@ class Application
       return "erreur reseau" if response["status"] != "ok"
       liste = Rho::JSON.parse(response["body"])
       @verbes = Verbe.init(liste)
+      nb_objets += @verbes.size
       response = Rho::Network.get({:url => site + "formes.json"})
       liste = Rho::JSON.parse(response["body"])
       nb_formes = Forme.init(@verbes,liste)
       nb_objets += nb_formes
     end
     $session[:deja_maj] = 'true'
-    return "#{nb_objets} objets mis à jour"
+    if nb_objets == 0 then
+      return "tout est à jour"
+    else
+      return "#{nb_objets} objets mis à jour"
+    end
   end
-
 end

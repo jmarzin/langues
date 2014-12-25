@@ -20,9 +20,8 @@
       <% else %>
         <li><a class='controle' href="<%= url_for :controller => :Revision, :action => :question %>" data-transition="slidedown">Reviser</a></li>
       <% end %>
-      <li><a class='controle' href="<%= url_for :controller => :Parametre, :action => :saisie %>" data-transition="fade">Parametrer</a></li>
+      <li><a class='controle' href="<%= url_for :controller => :Parametre, :action => :saisie %>">Parametrer</a></li>
       <li><a href="<%= url_for :controller => :Application, :action => :quit_app %>">Quitter</a></li>
-
     </ul>
 
   </div> 

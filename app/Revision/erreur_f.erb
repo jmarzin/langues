@@ -2,7 +2,7 @@
 
   <div data-role="header" data-position="inline">
     <h1 class="rouge">Erreur !</h1>
-    <a href="<%= Rho::Application.startURI %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
+    <a href="<%= Rho::Application.startURI %>" class="ui-btn-left" data-icon="home" data-direction="reverse" data-ajax='false'>
       Home
     </a>
   </div>
@@ -17,7 +17,7 @@
     <form method="POST" action="<%= url_for :action => :question_f %>" data-transition="slidedown">
            
           <h1> Verbe <%= Verbe.find($session[:question].verbe_id).infinitif %> </h1>
-          <h1> <%= Forme::CODES[$session[:question].code_forme.to_i][0] %> </h1>
+          <h1> <%= Forme::CODES[$session[:langue]][$session[:question].code_forme.to_i][0] %> </h1>
           
           <div data-role="fieldcontain">
             <label for="reponse" class="fieldLabel">Votre reponse</label>
