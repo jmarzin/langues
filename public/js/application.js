@@ -41,11 +41,28 @@ $(document).ready(function() {
 
   $('#objet').change(function(){
 	    if($('#objet').val() == 'Mot'){
-	        $('#liste_mots').show();
+	        $('#liste_themes').show();
 	        $('#liste_verbes').hide();
 	    } else {
-	        $('#liste_mots').hide();
+	        $('#liste_themes').hide();
 	        $('#liste_verbes').show();
 	};
+  });
+  $("#reconstruire").click(function (event) {
+  		param= {objet:$('#objet' ).val(),
+  			poids_min:$('#poids_min').val(),
+			age_rev_min:$('#age_rev_min').val(),
+			age_rev_min:$('#err_min').val(),
+			themes:$('#liste_themes :checked').map(function() {return $(this).val();}).get().join('$'),
+			verbes:$('#liste_verbes :checked').map(function() {return $(this).val();}).get().join('$'),
+  		};
+		$.ajax({
+			url: "/app/Parametre/stockage",
+			  data: param,
+			  timeout: 0
+	    }).done(function(message) {
+	    	  $('#message').html(message);
+	    }).fail(function(request, textStatus, errorThrown) {
+	    });
   });
 });

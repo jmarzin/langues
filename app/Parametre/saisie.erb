@@ -11,12 +11,12 @@
     <form method="POST" action="<%= url_for :action => :stockage %>">
 
       <% if @message then %>
-        <h1> <%=@message %></h1>
+        <h1 id="message"> <%=@message %></h1>
       <% else %>
         <br>
       <% end %>
    
-      <input type="submit" value="Reconstruire la liste"/>
+      <button type="button" id="reconstruire">Reconstruire la liste</button>
 
       <div data-role="fieldcontain" id="option">       
         <label for="objet" class="fieldLabel">Revision des</label>
@@ -40,7 +40,7 @@
         <input type="text" id="err_min" name="err_min" value="<%= $session[:param][:err_min]%>" />
       </div>
       
-      <div id=liste_mots <%= 'hidden' if $session[:param][:objet]=="Forme" %>>
+      <div id=liste_themes <%= 'hidden' if $session[:param][:objet]=="Forme" %>>
         <div data-role="fieldcontain">
           <h1>Restreindre aux themes suivants</h1>
           <% i = 0 %>
@@ -53,13 +53,13 @@
         
       <div id=liste_verbes <%= 'hidden' if $session[:param][:objet]=="Mot" %>>
         <div data-role="fieldcontain">       
-          <label for="verbe_id" class="fieldLabel">Verbe</label>
-          <select name="verbe_id" id="verbe_id">
-            <option value="">Tous les verbes</option>
-            <% Verbe.liste.each do |verbe| %>
-              <option value="<%= verbe.object %>" <%= 'selected' if $session[:param][:verbes].include?(verbe.object) %> ><%= verbe.infinitif %></option>
-            <% end %>
-          </select>
+          <h1>Restreindre aux verbes suivants</h1>
+          <% i = 0 %>
+          <% Verbe.liste.each do |verbe| %>
+            <label for="verbes[<%=i%>]"><input type="checkbox" <%= 'checked' if $session[:param][:verbes].include?(verbe.object) %> id="verbes[<%=i%>]" name="verbes[<%=i%>]" value="<%= verbe.object %>" /><%= verbe.infinitif %></label>  
+            <% i += 1 %>
+          <% end %>
+
         </div>
       </div>
       

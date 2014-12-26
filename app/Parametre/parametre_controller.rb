@@ -18,16 +18,17 @@ class ParametreController < Rho::RhoController
   end
   
   def stockage
+    @params = construit_hash(@request["request-query"])
     $session[:param][:objet] = @params["objet"]
     if @params["themes"] then
-      $session[:param][:themes] = @params["themes"].values
+      $session[:param][:themes] = @params["themes"]
     else
       $session[:param][:themes] = []
     end
-    if @params["verbe_id"] == "" then 
-      $session[:param][:verbes] = []
+    if @params["verbes"] then 
+      $session[:param][:verbes] = @params["verbes"]
     else
-      $session[:param][:verbes] = [@params["verbe_id"]]
+      $session[:param][:verbes] = []
     end
     $session[:param][:poids_min] = "%05d" % @params["poids_min"].to_i
     $session[:param][:age_rev_min] = @params["age_rev_min"]
@@ -50,7 +51,23 @@ class ParametreController < Rho::RhoController
       $session[:liste] = nil
       @message = "#{@nb} #{@texte} dans la liste"
     end
-    render :action => :saisie, :back => '/app'
+    render :string => @message, :use_layout_on_ajax => true    
   end
   
+  private
+  def construit_hash(texte)
+    resultat = {}
+    texte.split('&').each  do |egalite|
+      eclate = egalite.split('=')
+      eclate << ''
+      eclate[1]= eclate[1].split('%24')
+      unless ["themes","verbes"].include?(eclate[0]) then
+        eclate[1]=[""] if eclate[1].size==0
+        eclate[1]=eclate[1][0] if eclate[1].size==1
+      end
+      resultat[eclate[0]]=eclate[1]
+    end
+    resultat
+  end
+
 end
