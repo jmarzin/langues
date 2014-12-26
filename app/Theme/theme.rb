@@ -8,7 +8,7 @@ class Theme
 
   #add model specific code here
   def self.liste
-    Theme.find(:all,:langue_id=>$session[:langue][0..1],:order => 'nom')
+  Theme.find(:all,:conditions=>{:langue_id=>$session[:langue][0..1]},:order => 'nom')
   end
   
   def self.init(liste)

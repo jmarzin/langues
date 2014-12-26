@@ -9,7 +9,7 @@ class Verbe
   #add model specific code here
 
   def self.liste
-    Verbe.find(:all,:order => 'infinitif')
+    Verbe.find(:all,:conditions=>{:langue_id=>$session[:langue][0..1]},:order => 'infinitif')
   end
   
   def self.init(liste)

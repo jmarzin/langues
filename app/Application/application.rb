@@ -103,7 +103,7 @@ class Application
     end
     $session[:deja_maj] = 'true'
     if nb_objets == 0 then
-      return "tout est à jour"
+      return "Tout est à jour"
     else
       return "#{nb_objets} objets mis à jour"
     end
