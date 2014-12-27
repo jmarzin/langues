@@ -7,6 +7,7 @@
     <title><%= $session[:langue] %></title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
     <% if Rho::System.getProperty('platform') == 'APPLE' || Rho::System.getProperty('platform') == 'ANDROID' ||
         ( Rho::System.getProperty('platform') != 'WINDOWS' && Rho::System.getProperty('webviewFramework') =~ /^WEBKIT/) %>

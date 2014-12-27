@@ -4,7 +4,7 @@ require 'helpers/browser_helper'
 class ApplicationController < Rho::RhoController
   include BrowserHelper
   
-  def verif_maj
+  def ajax_verif_maj
     @langue = @request["request-query"]
     if @langue == $session[:langue] and $session[:deja_maj]== 'true' then
       render :string => 'ok', :use_layout_on_ajax => true

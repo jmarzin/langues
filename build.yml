@@ -1,7 +1,7 @@
 #sdk: "C:/MotorolaRhoMobileSuite5.0.2/ruby/lib/ruby/gems/1.9.1/gems/rhodes-5.0.2"
 sdkversion: "5.0.0"
 name: "Langues"
-version: 1.0
+version: 1.1
 vendor: "rhomobile"
 #build: "debug"
 build: "release"

@@ -6,6 +6,13 @@ class String
       self+'s'
     end
   end
+  
+  def uri_decode
+    {'%20'=>' ','%C3%A0'=>'à','%C3%A9'=>'é','%C3%A8'=>'è','%C3%AC'=>'ì','%C3%B2'=>'ò','%C3%B9'=>'ù'}.each_pair do |c,e|
+      self.gsub!(c, e)
+    end
+    self
+  end
 end
 
 # The model has already been created by the framework, and extends Rhom::RhomObject
@@ -56,7 +63,8 @@ class Application
     end
    
     sauve_session
-    
+    $session[:deja_maj] = 'true'
+          
     site = "http://langues.jmarzin.fr/#{$session[:langue].downcase}/api/v2/"
     #mise à jour des thèmes et des mots
     
@@ -101,7 +109,6 @@ class Application
       nb_formes = Forme.init(@verbes,liste)
       nb_objets += nb_formes
     end
-    $session[:deja_maj] = 'true'
     if nb_objets == 0 then
       return "Tout est à jour"
     else

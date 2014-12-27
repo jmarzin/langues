@@ -86,9 +86,17 @@ module Objet
       end
     end
     if $session[:liste].empty? then
-      false
+      return false
     else
-      classe.find($session[:liste][rand($session[:liste].size)])
+      question = {}
+      tire = classe.find($session[:liste][rand($session[:liste].size)])
+      question[:objet] = tire
+      if classe == Mot then
+        question[:texte] = "Theme #{Theme.find(tire.theme_id).nom}<br>#{tire.francais}"
+      else
+        question[:texte] = "Verbe #{Verbe.find(tire.verbe_id).infinitif}<br>#{Forme::CODES[$session[:langue]][tire.code_forme.to_i][0]}"
+      end
+      return question
     end
   end
   
