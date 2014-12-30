@@ -1,9 +1,9 @@
-rhodes_path='C:/MotorolaRhoMobileSuite5.0.2/ruby/lib/ruby/gems/1.9.1/gems/rhodes-5.0.2'
-app_version='1.0'
+rhodes_path='C:/MotorolaRhoMobileSuite5.0.25/ruby/lib/ruby/gems/1.9.1/gems/rhodes-5.0.25'
+app_version='1.12'
 app_name='Langues'
 reload_app_changes=0
 debug_port=
 debug_host='127.0.0.1'
 platform='android'
 os_version='4.0.3'
-ext_path=C:/MotorolaRhoMobileSuite5.0.2/ruby/lib/ruby/gems/1.9.1/gems/rhodes-5.0.2/lib/commonAPI/coreapi;C:/MotorolaRhoMobileSuite5.0.2/ruby/lib/ruby/gems/1.9.1/gems/rhodes-5.0.2/lib/extensions/json;
+ext_path=C:/MotorolaRhoMobileSuite5.0.25/ruby/lib/ruby/gems/1.9.1/gems/rhodes-5.0.25/lib/commonAPI/coreapi;C:/MotorolaRhoMobileSuite5.0.25/ruby/lib/ruby/gems/1.9.1/gems/rhodes-5.0.25/lib/extensions/json;

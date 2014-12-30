@@ -33,11 +33,10 @@ class Theme
       end
       objets[c[0]] = @c.object
     end
-    
-    Theme.delete_all(:conditions => {{:name => 'date_maj',:op => '<'} => @date,
-                                     {:name => 'langue_id',:op => 'LIKE'} => $session[:langue][0..1],
-                                      :op => 'AND'})
+
+    Objet.nettoye(Theme,@date,$session[:langue][0..1])
 
     objets
+      
   end
 end

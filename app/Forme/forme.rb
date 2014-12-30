@@ -95,10 +95,8 @@ class Forme
                           :date_maj => @date)
       end
     end
-    
-    Forme.delete_all(:conditions => {{:name => 'date_maj',:op => '<'} => @date,
-                                     {:name => 'langue_id',:op => '='} => $session[:langue][0..1],
-                                      :op => 'AND'})
+
+    Objet.nettoye(Forme,@date,$session[:langue][0..1])    
 
     Forme.count
     

@@ -5,12 +5,12 @@
   </div>
   
   <div id='deja_maj' hidden><%= $session[:deja_maj] %></div>
-  <div class = 'choix_langue'>
+  <div class = 'choix_langue masque'>
     <img id='italien' src='/public/images/italien.png' alt="italien" height='42' width='42' class='ui-btn ui-btn-inline'/>
     <img id='anglais' src='/public/images/anglais.png' alt="anglais" height='42' width='42' class='ui-btn ui-btn-inline'/>
   </div>
 
-  <div data-role="content">
+  <div data-role="content" class='masque'>
     <ul data-role="listview">
       <li><a class='controle' href="<%= url_for :controller => :Theme, :action => :index %>" data-transition="slide">Thèmes</a></li>
       <li><a class='controle' href="<%= url_for :controller => :Mot, :action => :index %>" data-transition="slideup">Mots</a></li>
@@ -22,6 +22,10 @@
     </ul>
 
   </div> 
-  <p class="chargement" hidden>Mise-a-jour en cours...</div>
+  
+  <div class="chargement" hidden>  
+    <p>Mise-à-jour en cours...</p>
+  </div>
+  
 </div>
      

@@ -20,6 +20,7 @@ $(document).ready(function() {
 	};
 	origine= $(this).text();
     if (origine == 'Paramétrer' || origine == 'Révision') {
+    	$.mobile.loading( 'show' )
       	event.preventDefault();
     };
 	if ($('#deja_maj').html() == 'true') {
@@ -37,9 +38,11 @@ $(document).ready(function() {
 		  data: langue,
 		  timeout: 600000
     }).done(function(data) {
+    	$.mobile.loading( 'hide' )
     	$(".chargement").hide();
 	    if (data.indexOf("inconnu") > -1) {
 	    	$('#langue').html('Choisissez la langue');
+	    	$( ".masque" ).show();
 	    	event.preventDefault();
 	    	return;
 	    };
@@ -55,7 +58,10 @@ $(document).ready(function() {
 	    	return
 	    };
     }).fail(function(request, textStatus, errorThrown) {
+    }).always(function() {
     });
+  
+	$( ".masque" ).hide();
   });
 
   $('#objet').change(function(){
@@ -71,13 +77,14 @@ $(document).ready(function() {
   		param= {objet:$('#objet' ).val(),
   			poids_min:$('#poids_min').val(),
 			age_rev_min:$('#age_rev_min').val(),
-			age_rev_min:$('#err_min').val(),
+			err_min:$('#err_min').val(),
 			themes:$('#liste_themes :checked').map(function() {return $(this).val();}).get().join('$'),
 			verbes:$('#liste_verbes :checked').map(function() {return $(this).val();}).get().join('$')
   		};
 		$.ajax({
 			url: "/app/Parametre/stockage",
 			  data: param,
+			  async: false,
 			  timeout: 600000
 	    }).done(function(message) {
 	    	  $('#message').html(message);
@@ -91,6 +98,7 @@ $(document).ready(function() {
   			$.ajax({
   				url: "/app/Revision/ajax_verifie",
   				  data: $('#reponse').val(),
+  				  async: false,
   				  timeout: 600000
   		    }).done(function(message) {
   		    	  $('#appel').html('Autre question');
@@ -111,6 +119,7 @@ $(document).ready(function() {
   			$.ajax({
   				url: "/app/Revision/pose_question",
   				  data: 'ajax',
+  				  async: false,
   				  timeout: 600000
   		    }).done(function(message) {
   		    	  if (message == 'vide') {

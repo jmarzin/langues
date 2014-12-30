@@ -108,4 +108,12 @@ module Objet
     return false
   end
 
+  def self.nettoye(classe,date,langue_id)
+    
+    cond1={:conditions => {:langue_id => langue_id}}
+    cond2={:conditions => {{:name => 'date_maj',:op => '<'}=> date}}
+    classe.delete_all(:conditions => [cond1,cond2] ,:op => 'AND')
+
+  end
+  
 end

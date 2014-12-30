@@ -18,8 +18,8 @@ MinSeverity  = 1
 #MinSeverity  = 3
 
 # enable copy log messages to standard output, useful for debugging
-LogToOutput = 1
-#LogToOutput = 0
+#LogToOutput = 1
+LogToOutput = 0
 
 # '*' means all categories, otherwise list them : Cat1, Cat2 
 LogCategories = *

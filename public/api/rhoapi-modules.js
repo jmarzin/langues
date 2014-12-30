@@ -3023,8 +3023,8 @@ var EB = Rho;
           // function(/* const rho::String& */ url, /* optional function */ oResult)
         , { methodName: 'openUrl', nativeName: 'openUrl', valueCallbackIndex: 1 }
     
-          // function(/* const rho::String& */ localPathToZip, /* const rho::String& */ password, /* optional function */ oResult)
-        , { methodName: 'unzipFile', nativeName: 'unzipFile', valueCallbackIndex: 2 }
+          // function(/* const rho::String& */ localPathToZip, /* const rho::String& */ password, /* const rho::String& */ outputFileName, /* optional function */ oResult)
+        , { methodName: 'unzipFile', nativeName: 'unzipFile', valueCallbackIndex: 3 }
     
           // function(/* const rho::String& */ localPathToZip, /* const rho::String& */ localPathToFile, /* const rho::String& */ password, /* optional function */ oResult)
         , { methodName: 'zipFile', nativeName: 'zipFile', valueCallbackIndex: 3 }

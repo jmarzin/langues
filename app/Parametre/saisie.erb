@@ -16,10 +16,10 @@
         <br>
       <% end %>
    
-      <button type="button" id="reconstruire">Reconstruire la liste</button>
+      <button type="button" id="reconstruire">Préparer la liste</button>
 
       <div data-role="fieldcontain" id="option">       
-        <label for="objet" class="fieldLabel">Revision des</label>
+        <label for="objet" class="fieldLabel">Révision des</label>
         <select name="objet" id="objet">
           <option value="Mot" <%= 'selected' if $session[:param][:objet]=="Mot" %>>Mots</option>
           <option value="Forme" <%= 'selected' if $session[:param][:objet]=="Forme" %>>Conjugaisons</option>
@@ -31,7 +31,7 @@
         <input type="text" id="poids_min" name="poids_min" value="<%= $session[:param][:poids_min]%>" />
       </div>
       <div data-role="fieldcontain">
-        <label for="age_rev_min" class="fieldLabel">Non revise depuis</label>
+        <label for="age_rev_min" class="fieldLabel">Non revisé depuis</label>
         <input type="number" id="age_rev_min" name="age_rev_min" value="<%= $session[:param][:age_rev_min]%>" /> jour(s)
       </div>
 
@@ -42,7 +42,7 @@
       
       <div id=liste_themes <%= 'hidden' if $session[:param][:objet]=="Forme" %>>
         <div data-role="fieldcontain">
-          <h1>Restreindre aux themes suivants</h1>
+          <h1>Restreindre aux thèmes suivants</h1>
           <% i = 0 %>
           <% Theme.liste.each do |theme| %>
             <label for="themes[<%=i%>]"><input type="checkbox" <%= 'checked' if $session[:param][:themes].include?(theme.object) %> id="themes[<%=i%>]" name="themes[<%=i%>]" value="<%= theme.object %>" /><%= theme.nom %></label>  

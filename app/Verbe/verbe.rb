@@ -34,9 +34,7 @@ class Verbe
       objets[v[0]] = @v.object
     end
     
-    Verbe.delete_all(:conditions => {{:name => 'date_maj',:op => '<'} => @date,
-                                     {:name => 'langue_id',:op => 'LIKE'} => $session[:langue][0..1],
-                                      :op => 'AND'})
+    Objet.nettoye(Verbe,@date,$session[:langue][0..1])
       
     objets
     

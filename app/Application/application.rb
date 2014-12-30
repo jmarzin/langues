@@ -66,19 +66,20 @@ class Application
     $session[:deja_maj] = 'true'
           
     site = "http://langues.jmarzin.fr/#{$session[:langue].downcase}/api/v2/"
+    erreur_reseau = 'Pas de réseau disponible. Mise à jour impossible.'
     #mise à jour des thèmes et des mots
     
     response = Rho::Network.get({:url => site + "date_categories.json"})
-    return "erreur reseau" if response["status"] != "ok"
+    return erreur_reseau if response["status"] != "ok"
     date_categories = response["body"]
     response = Rho::Network.get({:url => site + "date_mots.json"})
-    return "erreur reseau" if response["status"] != "ok"
+    return erreur_reseau if response["status"] != "ok"
     date_mots = response["body"]
     if date_categories > @appli.date_categories or date_mots > @appli.date_mots then
       @appli.update_attributes(:date_categories => [date_categories,date_mots].max,
                                :date_mots => [date_categories,date_mots].max)
       response = Rho::Network.get({:url => site + "categories.json"})
-      return "erreur reseau" if response["status"] != "ok"
+      return erreur_reseau if response["status"] != "ok"
       liste = Rho::JSON.parse(response["body"])
       @themes = Theme.init(liste)
       nb_objets += @themes.size
@@ -91,16 +92,16 @@ class Application
     #mise à jour des verbes et des formes
     
     response = Rho::Network.get({:url => site + "date_verbes.json"})
-    return "erreur reseau" if response["status"] != "ok"
+    return erreur_reseau if response["status"] != "ok"
     date_verbes = response["body"]
     response = Rho::Network.get({:url => site + "date_formes.json"})
-    return "erreur reseau" if response["status"] != "ok"
+    return erreur_reseau if response["status"] != "ok"
     date_formes = response["body"]
     if date_verbes > @appli.date_verbes or date_formes > @appli.date_formes then
       @appli.update_attributes(:date_verbes => [date_verbes,date_formes].max,
                                :date_formes => [date_verbes,date_formes].max)
       response = Rho::Network.get({:url => site + "verbes.json"})
-      return "erreur reseau" if response["status"] != "ok"
+      return erreur_reseau if response["status"] != "ok"
       liste = Rho::JSON.parse(response["body"])
       @verbes = Verbe.init(liste)
       nb_objets += @verbes.size

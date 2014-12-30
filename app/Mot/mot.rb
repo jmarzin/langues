@@ -45,10 +45,9 @@ class Mot
       end
     end
     
-    Mot.delete_all(:conditions => {{:name => 'date_maj',:op => '<'} => @date,
-                                   {:name => 'langue_id',:op => '='} => $session[:langue][0..1],
-                                    :op => 'AND'})
+    Objet.nettoye(Mot,@date,$session[:langue][0..1])
     
     Mot.count
+    
   end
 end
